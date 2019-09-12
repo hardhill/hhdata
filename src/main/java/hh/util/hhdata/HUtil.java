@@ -142,7 +142,7 @@ public class HUtil {
             startofDay = new Date(startofDay.getTime() + 60 * 60 * 1000);
             times.add(startofDay);
         }
-        ;
+
         return times;
     }
 
