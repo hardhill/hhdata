@@ -134,6 +134,10 @@ public class HUtil {
         return dates;
     }
 
+    /**
+     * @param curDate
+     * @return
+     */
     public static ArrayList<Date> GetTimes(Date curDate) {
         ArrayList<Date> times = new ArrayList<>();
         Date startofDay = atStartOfDay(curDate);
