@@ -83,7 +83,7 @@ public class HUtil {
         int cur_year = GetYearOfDate(new Date());
         for (int i = year; i <= cur_year + 1; i++) {
             cal.set(Calendar.YEAR, i);
-            cal.set(Calendar.MONTH, 1);
+            cal.set(Calendar.MONTH, 0);
             cal.set(Calendar.DAY_OF_MONTH, 1); //
             dates.add(cal.getTime());
         }
