@@ -27,6 +27,12 @@ public class HUtil {
         return new String(messageDigest.digest());
     }
 
+    /**
+     * Возвращает хаш строки в алгоритме MD5
+     *
+     * @param string - входная строка
+     * @return String
+     */
     public static String getHashMD5(String string) {
         MessageDigest messageDigest = null;
         try {
@@ -38,11 +44,57 @@ public class HUtil {
         return new String(messageDigest.digest());
     }
 
-    public static ArrayList<Date> GetLastYears(Date date) {
-        return
+    /**
+     * Возвращает год заданной даты
+     *
+     * @param date
+     * @return int - год
+     */
+    public static int GetYearOfDate(Date date) {
+        int year = 1900;
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        year = calendar.get(Calendar.YEAR);
+        return year;
     }
 
+    /**
+     * Первый день года по заданной дате
+     *
+     * @param date - дата любая
+     * @return Date - дата года
+     */
+    public static Date GetFirstDayOfYear(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, GetYearOfDate(date));
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        return cal.getTime();
+    }
 
+    /**
+     * Возврат Массив дат первого дня года начиная с года указанной даты
+     * @param date дата первого года в массиве
+     * @return Array dates - массив дат
+     */
+    public static ArrayList<Date> GetLastYears(Date date) {
+        ArrayList<Date> dates = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        int year = GetYearOfDate(date);
+        int cur_year = GetYearOfDate(new Date());
+        for (int i = year; i <= cur_year + 1; i++) {
+            cal.set(Calendar.YEAR, i);
+            cal.set(Calendar.MONTH, 1);
+            cal.set(Calendar.DAY_OF_MONTH, 1); //
+            dates.add(cal.getTime());
+        }
+        return dates;
+    }
+
+    /**
+     * Массив последник N дней
+     * @param days - количество дней
+     * @return Array(Date) массив дней
+     */
     public static ArrayList<Date> GetLastDates(int days) {
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
         ArrayList<Date> dates = new ArrayList<>();
