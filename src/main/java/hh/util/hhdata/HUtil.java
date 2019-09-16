@@ -29,7 +29,6 @@ public class HUtil {
 
     /**
      * Возвращает хаш строки в алгоритме MD5
-     *
      * @param string - входная строка
      * @return String
      */
@@ -46,7 +45,6 @@ public class HUtil {
 
     /**
      * Возвращает год заданной даты
-     *
      * @param date
      * @return int - год
      */
@@ -60,7 +58,6 @@ public class HUtil {
 
     /**
      * Первый день года по заданной дате
-     *
      * @param date - дата любая
      * @return Date - дата года
      */
@@ -91,6 +88,24 @@ public class HUtil {
     }
 
     /**
+     * Вернуть массив дат начальных дней последний N месяцев
+     *
+     * @param months - количество месяцев назад
+     * @return Array(Date) массив дат первого дня каждого месяца
+     */
+    public static ArrayList<Date> GetLasrMonth(int months) {
+        ArrayList<Date> dates = new ArrayList<>();
+        for (int i = months; i == 0; i--) {
+            LocalDate now = LocalDate.now();
+            LocalDate earlier = now.minusMonths(i);
+            Calendar calendar = new GregorianCalendar();
+            calendar.set(earlier.getYear(), earlier.getMonth().getValue(), 1);
+            dates.add(calendar.getTime());
+        }
+        return dates;
+    }
+
+    /**
      * Массив последник N дней
      * @param days - количество дней
      * @return Array(Date) массив дней
@@ -107,6 +122,11 @@ public class HUtil {
         return dates;
     }
 
+    /**
+     * массив дат от заданного до текущего
+     * @param ldate первая дата в массиве
+     * @return Array(Date) массив дат начиная от заданный до текущей
+     */
     public static ArrayList<Date> GetLastDates(java.sql.Date ldate) {
         LocalDate ldtNow = LocalDate.now();
         LocalDate farDate = ldate.toLocalDate();
@@ -118,6 +138,20 @@ public class HUtil {
         return dates;
     }
 
+    /**
+     * Последний день месяца заданной даты
+     *
+     * @param date - заданная дата
+     * @return Date - дата последнего дня месяца
+     */
+    public static Date GetLastDayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
     /**
      * Возвращает массив дат от и до включительно
      *
@@ -146,7 +180,6 @@ public class HUtil {
             startofDay = new Date(startofDay.getTime() + 60 * 60 * 1000);
             times.add(startofDay);
         }
-
         return times;
     }
 
