@@ -106,9 +106,9 @@ public class HUtil {
     }
 
     /**
-     * Массив последник N дней
+     * Массив последник N дней. Дата с начала суток
      * @param days - количество дней
-     * @return Array(Date) массив дней
+     * @return Array(Date) массив дней с начала суток
      */
     public static ArrayList<Date> GetLastDates(int days) {
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
@@ -117,7 +117,7 @@ public class HUtil {
         LocalDateTime ldt = LocalDateTime.now();
         for (int i = days; i >= 0; i--) {
             Date date = new Date(System.currentTimeMillis() - (i * DAY_IN_MS));
-            dates.add(date);
+            dates.add(atStartOfDay(date));
         }
         return dates;
     }
