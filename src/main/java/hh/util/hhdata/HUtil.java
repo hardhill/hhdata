@@ -93,9 +93,9 @@ public class HUtil {
      * @param months - количество месяцев назад
      * @return Array(Date) массив дат первого дня каждого месяца
      */
-    public static ArrayList<Date> GetLasrMonth(int months) {
+    public static ArrayList<Date> GetLastMonth(int months) {
         ArrayList<Date> dates = new ArrayList<>();
-        for (int i = months; i >= 0; i--) {
+        for (int i = months; i > 0; i--) {
             LocalDate now = LocalDate.now();
             LocalDate earlier = now.minusMonths(i);
             Calendar calendar = new GregorianCalendar();
